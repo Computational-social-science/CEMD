@@ -73,11 +73,12 @@ $$
 >
 > Answer: Given the consistency and credibility of these sources, it is reasonable to conclude that the CLAIM "COVID-19 is an airborne disease" is TRUE.
 
-
+* **Step 1:** Calculate TP, FP and FN using the above rules.
+  * $\left| \text{TP} \right|$ = 1 
+  * $\left| \text{FP} \right|$ = 0
+  * $\left| \text{FN} \right|$ = 0
 * **Step 2:** Use the formula depicted above to calculate factual correctness.
-  $$
-  \text{Factual correctness} = \frac{2 \cdot 1}{2 \cdot 1 + 0 + 0} = 1
-  $$
+  $\text{Factual correctness} = \frac{2 \cdot 1}{2 \cdot 1 + 0 + 0} = 1$
 <br/>
 
 * **Step 3:** Calculate the semantic similarity between the generated answer and the ground truth.
