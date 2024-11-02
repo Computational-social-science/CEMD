@@ -5,6 +5,14 @@ Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) ar
 ## Evaluation of RAG
 
 ### Retrieval
+We use t-SNE and UMAP to reduce the dimensionality of the text embedding of the retrieved claims and their corresponding contexts for the clustering analysis.
+
+Embedding model: [mxbai-embed-large-v1](https://www.mixedbread.ai/docs/embeddings/mxbai-embed-large-v1)
+
+Dimensionality reduction: 1024 to 2
+
+<br/>
+
 <img src="1. Evaluation of RAG/assets/umap.svg" style="zoom: 55%;" />
 
 Visualizing claim-context relevance with UMAP.
@@ -300,7 +308,7 @@ Binary classification experiments using all the data from the dataset. XY denote
 | RAG (RA) + SFT    | 0.9852           | 0.9797           | 0.9892           | 0.9711           |
 | RAG (OS) + SFT    | **0.9885**       | **0.9844**       | **0.9901**       | **0.9789**       |
 
-Ablation Study. The dataset used is COVMIS2, where RA stands for related articles, and OS represents online search.
+Ablation Study. The dataset used is COVMIS2, where RA stands for related articles, and OS represents online search. The model in the RAG pipeline is Llama-3-70B-Instruct. For the SFT, we employ Llama-3-8B-Instruct, fine-tuned with DoRA.
 
 ## Real-time Detection
 <img src="6. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />
