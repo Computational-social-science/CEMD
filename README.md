@@ -5,13 +5,13 @@ Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) ar
 ## Evaluation of RAG
 
 ### Retrieval
-<img src="1. Evaluation of RAG/assets/umap.svg" style="zoom: 55%;" />
+<img src="1. Evaluation of RAG/assets/umap1.svg" style="zoom: 55%;" />
 
 Visualizing claim-context relevance with UMAP.
 
 <br/><br/>
 
-<img src="1. Evaluation of RAG/assets/t-sne.svg" style="zoom: 55%;" />
+<img src="1. Evaluation of RAG/assets/t-sne1.svg" style="zoom: 55%;" />
 
 Visualizing claim-context relevance with t-SNE.
 
@@ -99,7 +99,7 @@ $$
   $$
   \text{Factual correctness} = \frac{2 \cdot 1}{2 \cdot 1 + 0 + 0} = 1
   $$
-  
+
 <img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 35%;" />
 
 Comparison of model performance in faithfulness and answer correctness metrics. 
