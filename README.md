@@ -89,7 +89,11 @@ $$
   $$
   \text{Answer correctness score} = 0.75 + 0.25\theta
   $$
-
+* **Step 3:** Use the formula depicted above to calculate faithfulness.
+  $$
+  \text{Faithfulness score} = \frac{1}{2} = 0.5
+  $$  
+  
 <img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 35%;" />
 
 Comparison of model performance in faithfulness and answer correctness metrics. 
