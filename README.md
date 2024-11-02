@@ -43,7 +43,10 @@ $$
   $$
   \text{Faithfulness score} = \frac{1}{2} = 0.5
   $$  
-
+* **Step 3:** Use the formula depicted above to calculate faithfulness.
+  $$
+  \text{Faithfulness score} = \frac{1}{2} = 0.5
+  $$  
 <br/><br/>
 
 The assessment of `Answer Correctness` involves gauging the accuracy of the generated answer when compared to the ground truth.
@@ -95,10 +98,7 @@ $$
   \text{Answer correctness score} = 0.75 + 0.25\theta
   $$
   
-* sdfsdf
-  $$
-  \text{Factual correctness} = \frac{2 \cdot 1}{2 \cdot 1 + 0 + 0} = 1
-  $$
+
 
 <img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 35%;" />
 
