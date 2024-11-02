@@ -80,15 +80,15 @@ $$
 * **Step 2:** Use the formula depicted above to calculate factual correctness.
   $$
   \text{Factual correctness} = \frac{2 \cdot 1}{2 \cdot 1 + 0 + 0} = 1
-  $$ 
+  $$
 * **Step 3:** Calculate the semantic similarity between the generated answer and the ground truth.
   $$
   \text{Semantic similarity} = \theta
   $$
 * **Step 4:** Use the formula depicted above to calculate answer correctness score.
-$$
-\text{Answer correctness score} = 0.75 + 0.25\theta
-$$
+  $$
+  \text{Answer correctness score} = 0.75 + 0.25\theta
+  $$
 
 <img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 35%;" />
 
