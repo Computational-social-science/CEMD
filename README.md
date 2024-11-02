@@ -5,7 +5,7 @@ Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) ar
 ## Evaluation of RAG
 
 ### Retrieval
-We use t-SNE and UMAP to reduce the dimensionality of the text embedding of the retrieved claims and their corresponding contexts for the clustering analysis.
+We use *t*-SNE and UMAP to reduce the dimensionality of the text embedding of the retrieved claims and their corresponding contexts for the clustering analysis.
 
 Embedding model: [mxbai-embed-large-v1](https://www.mixedbread.ai/docs/embeddings/mxbai-embed-large-v1)
 
@@ -13,15 +13,15 @@ Dimensionality reduction: 1024 to 2
 
 <br/>
 
-<img src="1. Evaluation of RAG/assets/umap.svg" style="zoom: 55%;" />
+<img src="1. Evaluation of RAG/assets/umap.png" style="zoom: 55%;" />
 
 Visualizing claim-context relevance with UMAP.
 
 <br/><br/>
 
-<img src="1. Evaluation of RAG/assets/t-sne.svg" style="zoom: 55%;" />
+<img src="1. Evaluation of RAG/assets/t-sne.png" style="zoom: 59%;" />
 
-Visualizing claim-context relevance with t-SNE.
+Visualizing claim-context relevance with *t*-SNE.
 
 ### Generation
 [Ragas](https://docs.ragas.io/en/stable/) is a library that provides tools to supercharge the evaluation of Large Language Model (LLM) applications. We evaluated the generative performance of the RAG pipeline using Ragas, selecting the top-performing LLM for subsequent classification experiments. 
