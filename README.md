@@ -43,10 +43,7 @@ $$
   $$
   \text{Faithfulness score} = \frac{1}{2} = 0.5
   $$  
-* **Step 3:** Use the formula depicted above to calculate faithfulness.
-  $$
-  \text{Faithfulness score} = \frac{1}{2} = 0.5
-  $$  
+
 <br/><br/>
 
 The assessment of `Answer Correctness` involves gauging the accuracy of the generated answer when compared to the ground truth.
@@ -81,19 +78,18 @@ $$
   * $\left| \text{FP} \right|$ = 0
   * $\left| \text{FN} \right|$ = 0
 * **Step 2:** Use the formula depicted above to calculate factual correctness.
-<br/>
   $$
   \text{Factual correctness} = \frac{2 \cdot 1}{2 \cdot 1 + 0 + 0} = 1
   $$
+<br/>
 
 * **Step 3:** Calculate the semantic similarity between the generated answer and the ground truth.
-<br/>
   $$
   \text{Semantic similarity} = \theta
   $$
+<br/>
 
 * **Step 4:** Use the formula depicted above to calculate answer correctness score.
-<br/>
   $$
   \text{Answer correctness score} = 0.75 + 0.25\theta
   $$
