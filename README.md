@@ -5,18 +5,92 @@ Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) ar
 ## Evaluation of RAG
 
 ### Retrieval
-<img src="1. Evaluation of RAG/assets/umap.svg" style="zoom: 75%;" />
+<img src="1. Evaluation of RAG/assets/umap.svg" style="zoom: 55%;" />
 
 Visualizing claim-context relevance with UMAP.
 
 <br/><br/>
 
-<img src="1. Evaluation of RAG/assets/t-sne.svg" style="zoom: 75%;" />
+<img src="1. Evaluation of RAG/assets/t-sne.svg" style="zoom: 55%;" />
 
 Visualizing claim-context relevance with t-SNE.
 
-### generation
-<img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 75%;" />
+### Generation
+[Ragas](https://docs.ragas.io/en/stable/) is a library that provides tools to supercharge the evaluation of Large Language Model (LLM) applications. We evaluated the generative performance of the RAG pipeline using Ragas, selecting the top-performing LLM for subsequent classification experiments. 
+
+`Faithfulness` metric measures the factual consistency of the generated answer against the given context. It is calculated from answer and retrieved context. The faithfulness score in our task is given by:
+
+$$
+\text{Faithfulness score} = \frac{\left| \text{Number of statements in the generated answer that can be inferred from the contexts} \right|}{\left| \text{Total number of statements in the generated answer} \right|}
+$$
+
+> **Example**
+> 
+> Question: Please judge the correctness of the CLAIM "COVID-19 is an airborne disease" based on the available information.
+> 
+> Contexts: Under experimental conditions, researchers found that the COVID-19 virus stayed viable in the air for three hours. The researchers estimate that in most real-world situations, the virus would remain suspended in the air for about 30 minutes, before settling onto surfaces. ... On 23 December, the World Health Organization (WHO) uttered the one word it had previously seemed incapable of applying to the virus SARS-CoV-2: ‘airborne’.
+>
+> Answer: COVID-19 can remain viable in the air for extended periods (up to six hours in experimental conditions and 30 minutes in real-world situations). Given the consistency and credibility of these sources, it is reasonable to conclude that the CLAIM "COVID-19 is an airborne disease" is TRUE.
+
+* **Step 1:** Break the generated answer into individual statements.
+  * Statements: 
+    * Statement 1: COVID-19 can remain viable in the air for extended periods, up to six hours in experimental conditions and 30 minutes in real-world situations.
+    * Statement 2: Given the consistency and credibility of these sources, it is reasonable to conclude that the CLAIM 'COVID-19 is an airborne disease' is TRUE.
+* **Step 2:** For each of the generated statements, verify if it can be inferred from the given context.
+  - Statement 1: No
+  - Statement 2: Yes
+* **Step 3:** Use the formula depicted above to calculate faithfulness.
+  $$
+  \text{Faithfulness score} = \frac{1}{2} = 0.5
+  $$  
+
+<br/><br/>
+
+The assessment of `Answer Correctness` involves gauging the accuracy of the generated answer when compared to the ground truth.
+
+Answer correctness is computed as the sum of factual correctness and the semantic similarity between the given answer and the ground truth. 
+
+Factual correctness quantifies the factual overlap between the generated answer and the ground truth answer. This is done using the concepts of: 
+- TP (True Positive): Facts or statements that are present in both the ground truth and the generated answer. 
+- FP (False Positive): Facts or statements that are present in the generated answer but not in the ground truth. 
+- FN (False Negative): Facts or statements that are present in the ground truth but not in the generated answer.
+
+Now, we can use the formula for the F1 score to quantify correctness based on the number of statements in each of these lists:
+
+$$
+\text{Factual correctness} = \frac{2 \cdot \left| \text{TP} \right|}{2 \cdot \left| \text{TP} \right| + \left| \text{FP} \right| + \left| \text{FN} \right|}
+$$
+
+Next, we calculate the semantic similarity between the generated answer and the ground truth. Once we have the semantic similarity, we take a weighted (0.75 and 0.25) average of the factual correctness and the semantic similarity calculated above to arrive at the final score.
+
+$$
+\text{Answer correctness score} = 0.75 \cdot \text{Factual correctness} + 0.25 \cdot \text{Semantic similarity}
+$$
+
+> **Example**
+>
+> Ground truth: The CLAIM "COVID-19 is an airborne disease" is TRUE.
+>
+> Answer: Given the consistency and credibility of these sources, it is reasonable to conclude that the CLAIM "COVID-19 is an airborne disease" is TRUE.
+
+* **Step 1:** Calculate TP, FP and FN using the above rules.
+  * $\left| \text{TP} \right|$ = 1 
+  * $\left| \text{FP} \right|$ = 0
+  * $\left| \text{FN} \right|$ = 0
+* **Step 2:** Use the formula depicted above to calculate factual correctness.
+  $$
+  \text{Factual correctness} = \frac{2 \cdot 1}{2 \cdot 1 + 0 + 0} = 1
+  $$ 
+* **Step 3:** Calculate the semantic similarity between the generated answer and the ground truth.
+  $$
+  \text{Semantic similarity} = \theta
+  $$
+* **Step 4:** Use the formula depicted above to calculate answer correctness score.
+$$
+\text{Answer correctness score} = 0.75 + 0.25\theta
+$$
+
+<img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 35%;" />
 
 Comparison of model performance in faithfulness and answer correctness metrics. 
 
@@ -236,6 +310,7 @@ Binary classification experiments using all the data from the dataset. XY denote
 | No RAG + SFT      | 0.9770           | 0.9686           | 0.9754           | 0.9623           |
 | RAG (RA) + SFT    | 0.9852           | 0.9797           | 0.9892           | 0.9711           |
 | RAG (OS) + SFT    | **0.9885**       | **0.9844**       | **0.9901**       | **0.9789**       |
+
 Ablation Study. The dataset used is COVMIS2, where RA stands for related articles, and OS represents online search.
 
 ## Real-time Detection
