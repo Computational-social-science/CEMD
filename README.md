@@ -5,13 +5,13 @@ Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) ar
 ## Evaluation of RAG
 
 ### Retrieval
-<img src="1. Evaluation of RAG/assets/umap1.svg" style="zoom: 55%;" />
+<img src="1. Evaluation of RAG/assets/umap.svg" style="zoom: 55%;" />
 
 Visualizing claim-context relevance with UMAP.
 
 <br/><br/>
 
-<img src="1. Evaluation of RAG/assets/t-sne1.svg" style="zoom: 55%;" />
+<img src="1. Evaluation of RAG/assets/t-sne.svg" style="zoom: 55%;" />
 
 Visualizing claim-context relevance with t-SNE.
 
@@ -39,10 +39,7 @@ $$
 * **Step 2:** For each of the generated statements, verify if it can be inferred from the given context.
   - Statement 1: No
   - Statement 2: Yes
-* **Step 3:** Use the formula depicted above to calculate faithfulness.
-  $$
-  \text{Faithfulness score} = \frac{1}{2} = 0.5
-  $$  
+* **Step 3:** Use the formula depicted above to calculate faithfulness: $\text{Faithfulness score} = \frac{1}{2} = 0.5$  
 
 <br/><br/>
 
@@ -77,23 +74,11 @@ $$
   * $\left| \text{TP} \right|$ = 1 
   * $\left| \text{FP} \right|$ = 0
   * $\left| \text{FN} \right|$ = 0
-* **Step 2:** Use the formula depicted above to calculate factual correctness.
-  $\text{Factual correctness} = \frac{2 \cdot 1}{2 \cdot 1 + 0 + 0} = 1$
-<br/>
-
-* **Step 3:** Calculate the semantic similarity between the generated answer and the ground truth.
-  $$
-  \text{Semantic similarity} = \theta
-  $$
-<br/>
-
-* **Step 4:** Use the formula depicted above to calculate answer correctness score.
-  $$
-  \text{Answer correctness score} = 0.75 + 0.25\theta
-  $$
+* **Step 2:** Use the formula depicted above to calculate factual correctness: $\text{Factual correctness} = \frac{2 \cdot 1}{2 \cdot 1 + 0 + 0} = 1$
+* **Step 3:** Calculate the semantic similarity between the generated answer and the ground truth: $\text{Semantic similarity} = \theta$
+* **Step 4:** Use the formula depicted above to calculate answer correctness score: $\text{Answer correctness score} = 0.75 + 0.25\theta$
 
 <br/>
-
 <img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 35%;" />
 
 Comparison of model performance in faithfulness and answer correctness metrics. 
