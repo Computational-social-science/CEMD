@@ -83,16 +83,7 @@ $$
   $$
 <br/>
 
-* **Step 3:** Calculate the semantic similarity between the generated answer and the ground truth.
-  $$
-  \text{Semantic similarity} = \theta
-  $$
-<br/>
 
-* **Step 4:** Use the formula depicted above to calculate answer correctness score.
-  $$
-  \text{Answer correctness score} = 0.75 + 0.25\theta
-  $$
   
 
 
