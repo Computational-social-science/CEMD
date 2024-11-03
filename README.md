@@ -66,16 +66,15 @@ We use *t*-SNE and UMAP to reduce the dimensionality of the text embedding of th
 Embedding model: [mxbai-embed-large-v1](https://www.mixedbread.ai/docs/embeddings/mxbai-embed-large-v1)
 
 Dimensionality reduction: 1024 to 2
-
 <br/>
 
-`<img src="1. Evaluation of RAG/assets/umap.png" style="zoom: 55%;" />`
+<img src="1. Evaluation of RAG/assets/umap.png" style="zoom: 55%;" />
 
 Visualizing claim-context relevance with UMAP.
 
-`<br/><br/>`
+<br/>
 
-`<img src="1. Evaluation of RAG/assets/t-sne.png" style="zoom: 59%;" />`
+<img src="1. Evaluation of RAG/assets/t-sne.png" style="zoom: 59%;" />
 
 Visualizing claim-context relevance with *t*-SNE.
 
@@ -106,7 +105,7 @@ $$
   - Statement 2: Yes
 * **Step 3:** Use the formula depicted above to calculate faithfulness: $\text{Faithfulness score} = \frac{1}{2} = 0.5$
 
-`<br/><br/>`
+<br/><br/>
 
 The assessment of `Answer Correctness` involves gauging the accuracy of the generated answer when compared to the ground truth.
 
@@ -152,7 +151,7 @@ Comparison of model performance in faithfulness and answer correctness metrics.
 ## Evaluation of Classification
 
 We conduct multiple binary classification experiments using data labeled as True and False from COVMIS2, combining various LLMs and fine-tuning strategies. Through extensive experimentation, we identified the optimal configuration for our CEMD framework. The most effective combination, named as `CEMDo`, includes the Llama-3-70B-Instruct LLM in the RAG pipeline, the Llama-3-8B-Instruct LLM for classification, and the DoRA fine-tuning strategy.
-`<br/>`
+<br/>
 
 <table>
     <tr>
@@ -274,9 +273,9 @@ We conduct multiple binary classification experiments using data labeled as True
 </table>
 Classification results of different LLMs and fine-tuning strategies.
 
-`<br/><br/>`
+<br/><br/>
 
-`<img src="2. Evaluation of Classification/assets/human_baseline.svg" style="zoom: 75%;" />`
+<img src="2. Evaluation of Classification and Performance/assets/human_baseline.svg" style="zoom: 75%;" />
 
 Comparative analysis of LLM combinations and fine-tuning strategies with human baseline (the center).
 
@@ -453,6 +452,6 @@ Ablation Study. The dataset used is COVMIS2, where RA stands for related article
 
 The CEMD framework harnesses external knowledge to augment the initial prior knowledge with regular 24-hour updates, thereby mitigating label redundancy and addressing the cold start problem.
 
-`<img src="6. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />`
+<img src="5. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />
 
 Misinformation detection with regular 24-hour updates
