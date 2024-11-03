@@ -366,13 +366,13 @@ Explore the differences between 6 strategies: the RAG pipeline combined with onl
 <td>0.8522</td>
 <td>0.8168</td>
 </tr>
-<!-- <tr>
+<tr>
 <td>No RAG + fine-tuning</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr> -->
+<td>0.9198</td>
+<td>0.8768</td>
+<td>0.8875</td>
+<td>0.8673</td>
+</tr>
 <tr>
 <td>RAG (OS) + fine-tuning</td>
 <td><strong>0.9378</strong></td>
