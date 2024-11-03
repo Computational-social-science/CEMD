@@ -157,10 +157,10 @@ We conduct multiple binary classification experiments using data labeled as True
     </tr>
     <tr>
         <td>DoRA</td>
-        <td>0.9877</td>
-        <td>0.9833</td>
-        <td>0.9884</td>
-        <td>0.9784</td>
+        <td><b>0.9877</b></td>
+        <td><b>0.9833</b></td>
+        <td><b>0.9884</b></td>
+        <td><b>0.9784</b></td>
     </tr>
     <tr>
         <td rowspan="5">Mistral-7B-Instruct-v0.3</td>
@@ -193,10 +193,10 @@ We conduct multiple binary classification experiments using data labeled as True
     </tr>
     <tr>
         <td>DoRA</td>
-        <td>0.9877</td>
-        <td>0.9833</td>
-        <td>0.9884</td>
-        <td>0.9784</td>
+        <td><b>0.9877</b></td>
+        <td><b>0.9833</b></td>
+        <td><b>0.9884</b></td>
+        <td><b>0.9784</b></td>
     </tr>
     <tr>
         <td rowspan="5">Llama-3-8B-Instruct</td>
