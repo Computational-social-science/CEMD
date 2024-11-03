@@ -2,6 +2,61 @@
 
 Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. Prior real-time misinformation detection tasks have been hindered by the dual problems of label redundancy and cold start. To this end, we propose a novel Cyclic Evidence-based Misinformation Detection (CEMD) framework, which incorporates two core mechanisms: (i) a Retrieval Augmented Generation (RAG) pipeline that accesses the latest external knowledge to augment insufficient prior knowledge, and (ii) a cyclic evidence-bootstrapping mechanism that mitigates label redundancy and cold start.
 
+## Dataset
+[COVMIS](https://github.com/caryou/COVMIS): COVMIS was constructed to support the misinformation identification approach that mimics the act of fact checking by human for truth labelling. COVMIS is collected from November 2019 to March 2021, this dataset contains 14,384 claims (statements), 134,320 related articles, and many features associated with the claims such as claimants, news sources, dates, truth labels (true, partly true or false) and justifications for the truth labels.
+
+
+[LIAR2](https://github.com/chengxuphd/liar2): The LIAR2 dataset is an upgrade of the LIAR dataset, which inherits the ideas of the LIAR dataset, refines the details and architecture, and expands the size of the dataset to make it more responsive to the needs of fake news detection tasks.
+
+<table>
+    <tr>
+        <th>Dataset</th>
+        <th>Label</th>
+        <th>Number</th>
+    </tr>
+    <tr>
+        <td rowspan="3">COVMIS2</td>
+        <td>T</td>
+        <td>1998</td>
+    </tr>
+    <tr>
+        <td>PT</td>
+        <td>2192</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>10038</td>
+    </tr>
+    <tr>
+        <td rowspan="6">LIAR2</td>
+        <td>T</td>
+        <td>2585</td>
+    </tr>
+    <tr>
+        <td>MT</td>
+        <td>3429</td>
+    </tr>
+    <tr>
+        <td>HT</td>
+        <td>3709</td>
+    </tr>
+    <tr>
+        <td>BT</td>
+        <td>3603</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>6605</td>
+    </tr>
+    <tr>
+        <td>PF</td>
+        <td>3031</td>
+    </tr>
+    </tr>
+</table>
+
+The composition of the dataset. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
+
 ## Evaluation of RAG
 
 ### Retrieval
@@ -92,6 +147,9 @@ $$
 Comparison of model performance in faithfulness and answer correctness metrics. 
 
 ## Evaluation of Classification
+We conduct multiple binary classification ex-periments using data labeled as True and False from COVMIS2, combining various LLMs and fine-tuning strategies. Through extensive experimentation, we identified the optimal configuration for our CEMD framework. The most effective combination, named as `CEMDo`, includes the Llama-3-70B-Instruct LLM in the RAG pipeline, the Llama-3-8B-Instruct LLM for classification, and the DoRA fine-tuning strategy.
+<br/>
+
 <table>
     <tr>
         <th>Model</th>
@@ -262,6 +320,74 @@ Comparative analysis of LLM combinations and fine-tuning strategies with human b
 Performance of FDHN and CEMDo on two different datasets.
 
 ## Data Recategorization
+We recategorize data with redundant labels using CEMDo fine-tuned with data labeled as *TRUE* or *FALSE*. Subsequently, we conduct binary classification experiments with all data from each dataset using CEMDo.
+
+<table>
+    <tr>
+        <th>Dataset</th>
+        <th>Label</th>
+        <th>Number</th>
+    </tr>
+    <tr>
+        <td rowspan="4">COVMIS2</td>
+        <td>T</td>
+        <td>2989</td>
+    </tr>
+    <tr>
+        <td>PT<sub>TRUE</sub></td>
+        <td>426</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>9203</td>
+    </tr>
+    <tr>
+        <td>PT<sub>FALSE</sub></td>
+        <td>1766</td>
+    </tr>
+    <tr>
+        <td rowspan="9">LIAR2</td>
+        <td>T</td>
+        <td>2585</td>
+    </tr>
+    <tr>
+        <td>MT<sub>TRUE</sub></td>
+        <td>2500</td>
+    </tr>
+    <tr>
+        <td>HT<sub>TRUE</sub></td>
+        <td>1361</td>
+    </tr>
+    <tr>
+        <td>BT<sub>TRUE</sub></td>
+        <td>583</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>6605</td>
+    </tr>
+    <tr>
+        <td>PF</td>
+        <td>3031</td>
+    </tr>
+    <tr>
+        <td>MT<sub>FALSE</sub></td>
+        <td>929</td>
+    </tr>
+    <tr>
+        <td>HT<sub>FALSE</sub></td>
+        <td>2348</td>
+    </tr>
+    <tr>
+        <td>BT<sub>FALSE</sub></td>
+        <td>3020</td>
+    </tr>
+</table>
+
+The composition of the dataset after recategorization. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
+
+<br/>
+
 <table>
   <tr>
     <th>Dataset</th>
@@ -295,7 +421,8 @@ Performance of FDHN and CEMDo on two different datasets.
     <td>0.9226</td>
   </tr>
 </table>
-Binary classification experiments using all the data from the dataset. XY denotes the portion of the data initially labeled as X that is recategorized as Y. T: True. PT: Partly True. F: False. MT: Mostly True. HT: Half True. BT: Barely True. PF: Pants on Fire.
+
+Binary classification experiments using all the data from the dataset. X<sub>Y</sub> denotes the portion of the data initially labeled as *X* that is recategorized as *Y*. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
 ## Ablation Study
 
@@ -311,6 +438,8 @@ Binary classification experiments using all the data from the dataset. XY denote
 Ablation Study. The dataset used is COVMIS2, where RA stands for related articles, and OS represents online search. The model in the RAG pipeline is Llama-3-70B-Instruct. For the SFT, we employ Llama-3-8B-Instruct, fine-tuned with DoRA.
 
 ## Real-time Detection
+The CEMD framework harnesses external knowledge to augment the initial prior knowledge with regular 24-hour updates, thereby mitigating label redundancy and addressing the cold start problem.
+
 <img src="6. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />
 
 Misinformation detection with regular 24-hour updates
