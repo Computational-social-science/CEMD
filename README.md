@@ -152,12 +152,12 @@ $$
 * **Step 4:** Use the formula depicted above to calculate answer correctness score: $\text{Answer correctness score} = 0.75 + 0.25\theta$
 
 <br/>
-For generation, we conducted experiments with SOLAR-10.7B-Instruct, Mixtral-8x7B-Instruct, and Llama-3-70B-Instruct. We can derive a comparison of the RAG generation performance of the three LLMs. 
+For COVMIS2, we conducted experiments with SOLAR-10.7B-Instruct, Mixtral-8x7B-Instruct, and Llama-3-70B-Instruct. We can derive a comparison of the RAG generation performance of the three LLMs. 
 <img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 35%;" />
 
-**Comparison of model performance in faithfulness and answer correctness metrics.** The horizontal axis represents the interval of a certain metric, while the vertical axis indicates the number of samples falling into that inter-val. 
+**Comparison of model performance in faithfulness and answer correctness metrics.** The horizontal axis represents the interval of a certain metric, while the vertical axis indicates the number of samples falling into that interval. 
 
-The experimental results demonstrate that the three LLMs exhibit varying degrees of differences in scores for faithfulness and answer correctness in the RAG generation task. The overall ranking for generation perfor-mance goes to: Llama-3-70B-Instruct > Mix-tral-8x7B-Instruct > SOLAR-10.7B-Instruct. Finally, we select Llama-3-70B-Instruct as the LLM for augmenting prior knowledge in sub-sequent experiments.
+The experimental results demonstrate that the three LLMs exhibit varying degrees of differences in scores for faithfulness and answer correctness in the RAG generation task. The overall ranking for generation performance goes to: Llama-3-70B-Instruct > Mixtral-8x7B-Instruct > SOLAR-10.7B-Instruct. Finally, we select Llama-3-70B-Instruct as the LLM for augmenting prior knowledge in subsequent experiments.
 
 ## Evaluation of Binary Classification
 
@@ -285,15 +285,15 @@ We conduct multiple binary classification experiments using data labeled as True
 Classification results of different LLMs and fine-tuning strategies.
 
 <br/><br/>
-While results may vary across different combinations, all configurations surpassed the previously established human baseline of 92.5%, demonstrating the effectiveness of our proposed approach.
+On the benchmark dataset COVMIS2, while results may vary across different combinations, all configurations surpassed the previously established human baseline of 92.5%, demonstrating the effectiveness of our proposed approach.
 
 <img src="2. Evaluation of Classification and Performance/assets/human_baseline.svg" style="zoom: 75%;" />
 
-Comparative analysis of LLM combinations and fine-tuning strategies with human baseline (the center).
+**Comparative analysis of LLM combinations and fine-tuning strategies with human baseline (the center).**
 
 ## Performance
 
-We also conduct experiments using the LIAR2 dataset and compare the performance of [FDHN](https://github.com/chengxuphd/FDHN) with that of CEMDo. It is evident that CEMDo outperforms FDHN on both COVMIS2 and LIAR2.
+We conduct experiments using the benchmark datasets and compare the performance of [FDHN](https://github.com/chengxuphd/FDHN) with that of CEMDo. It is evident that CEMDo outperforms FDHN on both COVMIS2 and LIAR2.
 
 <table>
   <tr>
@@ -306,14 +306,14 @@ We also conduct experiments using the LIAR2 dataset and compare the performance 
   </tr>
   <tr>
     <td rowspan="2">COVMIS2</td>
-    <td>FDHN</td>
+    <td>FDHN (Xu and Kechadi, 2024)</td>
     <td>0.9459</td>
     <td>0.9269</td>
     <td>0.9279</td>
     <td>0.9259</td>
   </tr>
   <tr>
-    <td>CEMDo</td>
+    <td>CEMDo (ours)</td>
     <td><b>0.9885</b></td>
     <td><b>0.9844</b></td>
     <td><b>0.9901</b></td>
@@ -321,14 +321,14 @@ We also conduct experiments using the LIAR2 dataset and compare the performance 
   </tr>
   <tr>
     <td rowspan="2">LIAR2</td>
-    <td>FDHN</td>
+    <td>FDHN (Xu and Kechadi, 2024)</td>
     <td>0.8183</td>
     <td>0.6465</td>
     <td>0.7501</td>
     <td>0.6236</td>
   </tr>
   <tr>
-    <td>CEMDo</td>
+    <td>CEMDo (ours)</td>
     <td><b>0.9378</b></td>
     <td><b>0.9074</b></td>
     <td><b>0.9052</b></td>
@@ -337,10 +337,37 @@ We also conduct experiments using the LIAR2 dataset and compare the performance 
 </table>
 Performance of FDHN and CEMDo on two different datasets.
 
-## Data Recategorization
+### Ablation Study
 
-We recategorize data with redundant labels using CEMDo fine-tuned with data labeled as *TRUE* or *FALSE*. Subsequently, we conduct binary classification experiments with all data from each dataset using CEMDo.
+Explore the differences between 6 strategies: the RAG pipeline combined with online search, the RAG pipeline using a local knowledge base, the strategy without using a RAG pipeline and each of these strategies combined with fine-tuning stratedy. We use COVMIS2 as the dataset for the comparative experiments, with related articles serving as the local knowledge base.
 
+The results show that using RAG and SFT can improve the misinformation detection.
+
+| Method            | Acc              | F1               | P                | R                |
+| :---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
+| No RAG + No fine-tuning   | 0.7902           | 0.7632           | 0.7548           | 0.8339           |
+| RAG (RA) + No fine-tuning | 0.8828           | 0.8465           | 0.8376           | 0.8571           |
+| RAG (OS) + No fine-tuning | 0.9107           | 0.8830           | 0.8731           | 0.8947           |
+| No RAG + fine-tuning      | 0.9770           | 0.9686           | 0.9754           | 0.9623           |
+| RAG (RA) + fine-tuning    | 0.9852           | 0.9797           | 0.9892           | 0.9711           |
+| RAG (OS) + fine-tuning    | **0.9885** | **0.9844** | **0.9901** | **0.9789** |
+
+Ablation Study. The dataset used is COVMIS2, where RA stands for local related articles, and OS represents online search. The model in the RAG pipeline is Llama-3-70B-Instruct. For the fine-tuning strategy, we employ Llama-3-8B-Instruct, fine-tuned with DoRA.
+
+### Real-time Detection
+
+The CEMD framework harnesses external knowledge to augment the initial prior knowledge with regular 24-hour updates, thereby mitigating label redundancy and addressing the cold start problem.
+
+<img src="5. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />
+
+Misinformation detection with regular 24-hour updates.
+
+## Curating Benchmark Datasets for Misinformation Detection Task
+
+### Before re-categorization
+
+### After re-categorization
+To facilitate the development of effective misinformation detection models, we curated two benchmark datasets, COVMIS2024 (built upon COVMIS2) and LIAR2024 (built upon [LIAR2](https://github.com/chengxuphd/liar2)), for binary classification tasks. We leveraged our CEMDo pipeline, which has demonstrated superior performance to human baselines, to recategorize data with redundant labels. Specifically, we fine-tuned CEMDo using data labeled as *TRUE* or *FALSE*, enabling the creation of high-quality benchmark datasets.
 <table>
     <tr>
         <th>Dataset</th>
@@ -405,6 +432,8 @@ We recategorize data with redundant labels using CEMDo fine-tuned with data labe
 
 The composition of the dataset after recategorization. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
+### Establishing Baselines for COVMIS2024 and LIAR2024
+Using the curated datasets, we conducted binary classification experiments to establish baselines for COVMIS2024 and LIAR2024.  
 <br/>
 
 <table>
@@ -443,30 +472,7 @@ The composition of the dataset after recategorization. T: *True*. PT: *Partly Tr
 
 Binary classification experiments using all the data from the dataset. X<sub>Y</sub> denotes the portion of the data initially labeled as *X* that is recategorized as *Y*. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
-## Ablation Study
-
-Explore the differences between 6 strategies: the RAG pipeline combined with online search, the RAG pipeline using a local knowledge base, the strategy without using a RAG pipeline and each of these strategies combined with the SFT. We use COVMIS2 as the dataset for the comparative experiments, with related articles serving as the local knowledge base.
-
-The results show that using RAG and SFT can improve the misinformation detection.
-
-| Method            | Acc              | F1               | P                | R                |
-| :---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
-| No RAG + No SFT   | 0.7902           | 0.7632           | 0.7548           | 0.8339           |
-| RAG (RA) + No SFT | 0.8828           | 0.8465           | 0.8376           | 0.8571           |
-| RAG (OS) + No SFT | 0.9107           | 0.8830           | 0.8731           | 0.8947           |
-| No RAG + SFT      | 0.9770           | 0.9686           | 0.9754           | 0.9623           |
-| RAG (RA) + SFT    | 0.9852           | 0.9797           | 0.9892           | 0.9711           |
-| RAG (OS) + SFT    | **0.9885** | **0.9844** | **0.9901** | **0.9789** |
-
-Ablation Study. The dataset used is COVMIS2, where RA stands for related articles, and OS represents online search. The model in the RAG pipeline is Llama-3-70B-Instruct. For the SFT, we employ Llama-3-8B-Instruct, fine-tuned with DoRA.
-
-## Real-time Detection
-
-The CEMD framework harnesses external knowledge to augment the initial prior knowledge with regular 24-hour updates, thereby mitigating label redundancy and addressing the cold start problem.
-
-<img src="5. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />
-
-Misinformation detection with regular 24-hour updates.
+Our results provide the latest benchmarks for misinformation detection tasks, offering a foundation for future research and development in this critical area. By providing these baselines, we aim to facilitate the creation of more effective misinformation detection models and contribute to the ongoing effort to combat the spread of misinformation.
 
 ## Citing this work
 The relevant paper is currently under review, during which time this repository is private. Once it goes public, a bibtex reference will be provided here.
