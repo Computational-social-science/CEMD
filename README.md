@@ -429,7 +429,7 @@ Binary classification experiments using all the data from the dataset. X<sub>Y</
 ## Ablation Study
 Explore the differences between 6 strategies: the RAG pipeline combined with online search, the RAG pipeline using a local knowledge base, the strategy without using a RAG pipeline and each of these strategies combined with the SFT. We use COVMIS2 as the dataset for the comparative experiments, with related articles serving as the local knowledge base.
 
-From the results, we can see that using RAG and SFT can improve the misinformation detection.
+The results show that using RAG and SFT can improve the misinformation detection.
 
 | Method            | Acc              | F1               | P                | R                |
 | :---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
