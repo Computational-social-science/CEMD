@@ -11,54 +11,6 @@ Existing misinformation detection benchmark datasets (e.g., [COVMIS](https://git
 
 [LIAR2](https://github.com/chengxuphd/liar2): The LIAR2 dataset is an upgrade of the LIAR dataset, which inherits the ideas of the LIAR dataset, refines the details and architecture, and expands the size of the dataset to make it more responsive to the needs of fake news detection tasks.
 
-<table>
-    <tr>
-        <th>Dataset</th>
-        <th>Label</th>
-        <th>Number</th>
-    </tr>
-    <tr>
-        <td rowspan="3">COVMIS</td>
-        <td>T</td>
-        <td>1998</td>
-    </tr>
-    <tr>
-        <td>PT</td>
-        <td>2192</td>
-    </tr>
-    <tr>
-        <td>F</td>
-        <td>10038</td>
-    </tr>
-    <tr>
-        <td rowspan="6">LIAR2</td>
-        <td>T</td>
-        <td>2585</td>
-    </tr>
-    <tr>
-        <td>MT</td>
-        <td>3429</td>
-    </tr>
-    <tr>
-        <td>HT</td>
-        <td>3709</td>
-    </tr>
-    <tr>
-        <td>BT</td>
-        <td>3603</td>
-    </tr>
-    <tr>
-        <td>F</td>
-        <td>6605</td>
-    </tr>
-    <tr>
-        <td>PF</td>
-        <td>3031</td>
-    </tr>
-    </tr>
-</table>
-
-The composition of the dataset. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
 ### COVMIS2: A Novel Benchmark dataset
 We introduce a novel benchmark dataset, COVMIS2, built upon [LIAR2](https://github.com/chengxuphd/liar2), and conduct comprehensive experiments to evaluate the efficacy of our framework. 
@@ -366,6 +318,55 @@ The cyclic nature of our CEMD framework is leveraged through a cyclic bootstrapp
 Existing misinformation detection benchmark datasets (e.g., [COVMIS](https://github.com/caryou/COVMIS) and [LIAR2](https://github.com/chengxuphd/liar2)) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. 
 
 ### Before re-categorization
+<table>
+    <tr>
+        <th>Dataset</th>
+        <th>Label</th>
+        <th>Number</th>
+    </tr>
+    <tr>
+        <td rowspan="3">COVMIS</td>
+        <td>T</td>
+        <td>1998</td>
+    </tr>
+    <tr>
+        <td>PT</td>
+        <td>2192</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>10038</td>
+    </tr>
+    <tr>
+        <td rowspan="6">LIAR2</td>
+        <td>T</td>
+        <td>2585</td>
+    </tr>
+    <tr>
+        <td>MT</td>
+        <td>3429</td>
+    </tr>
+    <tr>
+        <td>HT</td>
+        <td>3709</td>
+    </tr>
+    <tr>
+        <td>BT</td>
+        <td>3603</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>6605</td>
+    </tr>
+    <tr>
+        <td>PF</td>
+        <td>3031</td>
+    </tr>
+    </tr>
+</table>
+
+The composition of the dataset. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
+
 
 ### After re-categorization
 To facilitate the development of effective misinformation detection models, we curated two benchmark datasets, COVMIS2024 (built upon COVMIS2) and LIAR2024 (built upon [LIAR2](https://github.com/chengxuphd/liar2)), for binary classification tasks. We leveraged our CEMDo pipeline, which has demonstrated superior performance to human baselines, to recategorize data with redundant labels. Specifically, we fine-tuned CEMDo using data labeled as *TRUE* or *FALSE*, enabling the creation of high-quality benchmark datasets.
