@@ -341,7 +341,7 @@ Performance of FDHN and CEMDo on two different datasets.
 
 Explore the differences between 6 strategies: the RAG pipeline combined with online search, the RAG pipeline using a local knowledge base, the strategy without using a RAG pipeline and each of these strategies combined with fine-tuning stratedy. We use COVMIS2 as the dataset for the comparative experiments, with related articles serving as the local knowledge base.
 
-The results show that using RAG and SFT can improve the misinformation detection.
+The results show that using RAG and fine-tuning can improve the misinformation detection.
 
 | Method            | Acc              | F1               | P                | R                |
 | :---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
