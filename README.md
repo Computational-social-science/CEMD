@@ -68,6 +68,8 @@ Embedding model: [mxbai-embed-large-v1](https://www.mixedbread.ai/docs/embedding
 Dimensionality reduction: 1024 to 2
 <br/>
 
+For the clustering analysis using UMAP projections, the features of retrieved contexts tend to group together in neighborhoods of each claim. We find that the average distance for the top 95% ranges from 0 to 0.2294 (data is normalized).
+
 <img src="1. Evaluation of RAG/assets/umap.png" style="zoom: 55%;" />
 
 Visualizing claim-context relevance with UMAP.
@@ -429,7 +431,7 @@ The composition of the dataset after recategorization. T: *True*. PT: *Partly Tr
   </tr>
 </table>
 
-Binary classification experiments using all the data from the dataset. X`<sub>`Y`</sub>` denotes the portion of the data initially labeled as *X* that is recategorized as *Y*. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
+Binary classification experiments using all the data from the dataset. X<sub>Y</sub> denotes the portion of the data initially labeled as *X* that is recategorized as *Y*. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
 ## Ablation Study
 
