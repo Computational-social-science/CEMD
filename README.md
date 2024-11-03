@@ -30,14 +30,14 @@ For the clustering analysis on COVMIS2 using t-SNE projections, the features of 
 
 <img src="1. Evaluation of RAG/assets/t-sne.svg" style="zoom: 30%;" />
 
-**Visualizing claim-context relevance with *t*-SNE.** The *t*-SNE visualization of the COVMIS2 dataset with 73,150 features in 12,192 clusters based on the same parameters (n_neighbors=20, min_dist=0.35).
+**Visualizing claim-context relevance with *t*-SNE.** The *t*-SNE visualization of the COVMIS2 dataset with 73,150 features in 12,192 clusters based on the same parameters (perplexity=30).
 
 #### UMAP projections
-For the clustering analysis on COVMIS2 using UMAP projections, the features of retrieved contexts (red) tend to group together in neighborhoods of each claim (blue). We find that the average distance for the top 95% ranges from 0 to 0.2294 (data is normalized).
+For the clustering analysis on COVMIS2 using UMAP projections, the features of retrieved contexts (red) tend to group together in neighborhoods of each claim (blue). We find that the average distance for the top 95% ranges from 0 to 0.1697 (data is normalized).
 
 <img src="1. Evaluation of RAG/assets/umap.svg" style="zoom: 30%;" />
 
-**Visualizing claim-context relevance with UMAP.** The UMAP visualization of the COVMIS2 dataset with 73,150 features in 12,192 clusters based on the same parameters (n_neighbors=10, min_dist=0.001).
+**Visualizing claim-context relevance with UMAP.** The UMAP visualization of the COVMIS2 dataset with 73,150 features in 12,192 clusters based on the same parameters (n_neighbors=20, min_dist=0.35).
 
 ### Metrics of RAGAs
 
@@ -292,20 +292,98 @@ Performance of FDHN and CEMDo on two different datasets.
 
 ### Ablation Study
 
-Explore the differences between 6 strategies: the RAG pipeline combined with online search, the RAG pipeline using a local knowledge base, the strategy without using a RAG pipeline and each of these strategies combined with fine-tuning stratedy. We use COVMIS2 as the dataset for the comparative experiments, with related articles serving as the local knowledge base.
+Explore the differences between 6 strategies: the RAG pipeline combined with online search, the RAG pipeline using a local knowledge base, the strategy without using a RAG pipeline and each of these strategies combined with fine-tuning stratedy. We use COVMIS2 and LIAR2 as the dataset for the comparative experiments, with related articles serving as the local knowledge base.
+
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Method</th>
+<th>Acc</th>
+<th>F1</th>
+<th>P</th>
+<th>R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="6">COVMIS2</td>
+<td>No RAG + No fine-tuning</td>
+<td>0.7902</td>
+<td>0.7632</td>
+<td>0.7548</td>
+<td>0.8339</td>
+</tr>
+<tr>
+<td>RAG (RA) + No fine-tuning</td>
+<td>0.8828</td>
+<td>0.8465</td>
+<td>0.8376</td>
+<td>0.8571</td>
+</tr>
+<tr>
+<td>RAG (OS) + No fine-tuning</td>
+<td>0.9107</td>
+<td>0.8830</td>
+<td>0.8731</td>
+<td>0.8947</td>
+</tr>
+<tr>
+<td>No RAG + fine-tuning</td>
+<td>0.9770</td>
+<td>0.9686</td>
+<td>0.9754</td>
+<td>0.9623</td>
+</tr>
+<tr>
+<td>RAG (RA) + fine-tuning</td>
+<td>0.9852</td>
+<td>0.9797</td>
+<td>0.9892</td>
+<td>0.9711</td>
+</tr>
+<tr>
+<td>RAG (OS) + fine-tuning</td>
+<td><strong>0.9885</strong></td>
+<td><strong>0.9844</strong></td>
+<td><strong>0.9901</strong></td>
+<td><strong>0.9789</strong></td>
+</tr>
+<tr>
+<td rowspan="4">LIAR2</td>
+<td>No RAG + No fine-tuning</td>
+<td>0.7741</td>
+<td>0.7178</td>
+<td>0.7032</td>
+<td>0.7734</td>
+</tr>
+<tr>
+<td>RAG (OS) + No fine-tuning</td>
+<td>0.8936</td>
+<td>0.8325</td>
+<td>0.8522</td>
+<td>0.8168</td>
+</tr>
+<!-- <tr>
+<td>No RAG + fine-tuning</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr> -->
+<tr>
+<td>RAG (OS) + fine-tuning</td>
+<td><strong>0.9378</strong></td>
+<td><strong>0.9074</strong></td>
+<td><strong>0.9052</strong></td>
+<td><strong>0.9097</strong></td>
+</tr>
+</tbody>
+</table>
+
+Ablation Study. RA stands for local related articles, and OS represents online search. The model in the RAG pipeline is Llama-3-70B-Instruct. For the fine-tuning strategy, we employ Llama-3-8B-Instruct, fine-tuned with DoRA.
 
 The results show that using RAG and fine-tuning can improve the misinformation detection.
-
-| Method            | Acc              | F1               | P                | R                |
-| :---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
-| No RAG + No fine-tuning   | 0.7902           | 0.7632           | 0.7548           | 0.8339           |
-| RAG (RA) + No fine-tuning | 0.8828           | 0.8465           | 0.8376           | 0.8571           |
-| RAG (OS) + No fine-tuning | 0.9107           | 0.8830           | 0.8731           | 0.8947           |
-| No RAG + fine-tuning      | 0.9770           | 0.9686           | 0.9754           | 0.9623           |
-| RAG (RA) + fine-tuning    | 0.9852           | 0.9797           | 0.9892           | 0.9711           |
-| RAG (OS) + fine-tuning    | **0.9885** | **0.9844** | **0.9901** | **0.9789** |
-
-Ablation Study. The dataset used is COVMIS2, where RA stands for local related articles, and OS represents online search. The model in the RAG pipeline is Llama-3-70B-Instruct. For the fine-tuning strategy, we employ Llama-3-8B-Instruct, fine-tuned with DoRA.
 
 ### Real-time Detection
 The cyclic nature of our CEMD framework is leveraged through a cyclic bootstrapping mechanism with RAG, which harnesses external knowledge to augment the initial prior knowledge with regular 24-hour updates, thereby mitigating label redundancy and addressing the cold start problem. 
@@ -432,7 +510,7 @@ To facilitate the development of effective misinformation detection models, we c
     </tr>
 </table>
 
-The composition of the dataset after recategorization. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
+The composition of the dataset after recategorization. X<sub>Y</sub> denotes the portion of the data initially labeled as *X* that is recategorized as *Y*. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
 ### Establishing Baselines for COVMIS2024 and LIAR2024
 Using the curated datasets, we conducted binary classification experiments to establish baselines for COVMIS2024 and LIAR2024.
