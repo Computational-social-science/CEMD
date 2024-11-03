@@ -355,12 +355,11 @@ The results show that using RAG and SFT can improve the misinformation detection
 Ablation Study. The dataset used is COVMIS2, where RA stands for local related articles, and OS represents online search. The model in the RAG pipeline is Llama-3-70B-Instruct. For the fine-tuning strategy, we employ Llama-3-8B-Instruct, fine-tuned with DoRA.
 
 ### Real-time Detection
-
-The CEMD framework harnesses external knowledge to augment the initial prior knowledge with regular 24-hour updates, thereby mitigating label redundancy and addressing the cold start problem.
+The cyclic nature of our CEMD framework is leveraged through a cyclic bootstrapping mechanism with RAG, which harnesses external knowledge to augment the initial prior knowledge with regular 24-hour updates, thereby mitigating label redundancy and addressing the cold start problem. 
 
 <img src="5. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />
 
-Misinformation detection with regular 24-hour updates.
+**Misinformation detection on COVMIS2 with regular 24-hour updates (27 September, 2024 - 2 November, 2024)($Acc_{max}$ = 0.9885, $Acc_{min}$ = 0.9861).**
 
 ## Curating Benchmark Datasets for Misinformation Detection Task
 
