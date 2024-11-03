@@ -2,10 +2,10 @@
 
 Prior real-time misinformation detection tasks have been hindered by the dual problems of label redundancy and cold start. To this end, we propose a novel Cyclic Evidence-based Misinformation Detection (CEMD) framework, which incorporates two core mechanisms: (i) a Retrieval Augmented Generation (RAG) pipeline that accesses the latest external knowledge to augment insufficient prior knowledge, and (ii) a cyclic evidence-bootstrapping mechanism that mitigates label redundancy and cold start.
 
-We introduce a novel benchmark dataset, COVMIS2, built upon COVMIS, and conduct comprehensive experiments to evaluate the efficacy of our framework. Our results demonstrate that CEMD outperforms the prior state-of-the-art (SOTA) baseline on LIAR2 by 11.95% and surpasses the human baseline on COVMIS2 by 6.31%, leveraging the Llama-3-70B-Instruct model to augment prior knowledge and the DoRA fine-tuned Llama-3-8B-Instruct model for binary classification.
+We introduce a novel benchmark dataset, COVMIS2, built upon [COVMIS](https://github.com/caryou/COVMIS), and conduct comprehensive experiments to evaluate the efficacy of our framework. Our results demonstrate that CEMD outperforms the prior state-of-the-art (SOTA) baseline on [LIAR2](https://github.com/chengxuphd/liar2) by 11.95% and surpasses the human baseline on COVMIS2 by 6.31%, leveraging the Llama-3-70B-Instruct model to augment prior knowledge and the DoRA fine-tuned Llama-3-8B-Instruct model for binary classification.
 
 ## Datasets
-Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. 
+Existing misinformation detection benchmark datasets (e.g., [COVMIS](https://github.com/caryou/COVMIS) and [LIAR2](https://github.com/chengxuphd/liar2)) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. 
 ### Common Benchmark datasets
 [COVMIS](https://github.com/caryou/COVMIS): COVMIS was constructed to support the misinformation identification approach that mimics the act of fact checking by human for truth labelling. COVMIS is collected from November 2019 to March 2021, this dataset contains 14,384 claims (statements), 134,320 related articles, and many features associated with the claims such as claimants, news sources, dates, truth labels (true, partly true or false) and justifications for the truth labels.
 
@@ -61,7 +61,7 @@ Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) ar
 The composition of the dataset. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
 ### COVMIS2: A Novel Benchmark dataset
-We introduce a novel benchmark dataset, COVMIS2, built upon COVMIS, and conduct comprehensive experiments to evaluate the efficacy of our framework. 
+We introduce a novel benchmark dataset, COVMIS2, built upon [LIAR2](https://github.com/chengxuphd/liar2), and conduct comprehensive experiments to evaluate the efficacy of our framework. 
 
 ## Evaluation of RAG
 
@@ -294,7 +294,7 @@ On the benchmark dataset COVMIS2, while results may vary across different combin
 
 ## Performance
 
-We conduct experiments using the benchmark datasets and compare the performance of [FDHN](https://github.com/chengxuphd/FDHN) with that of CEMDo. It is evident that CEMDo outperforms FDHN on both COVMIS2 and LIAR2.
+We conduct experiments using the benchmark datasets and compare the performance of [FDHN](https://github.com/chengxuphd/FDHN) with that of CEMDo. It is evident that CEMDo outperforms FDHN on both COVMIS2 and [LIAR2](https://github.com/chengxuphd/liar2).
 
 <table>
   <tr>
@@ -363,6 +363,7 @@ The cyclic nature of our CEMD framework is leveraged through a cyclic bootstrapp
 **Misinformation detection on COVMIS2 with regular 24-hour updates (27 September, 2024 - 2 November, 2024)(Acc<sub>max</sub> = 0.9885, Acc<submin</sub> = 0.9861).**
 
 ## Curating Benchmark Datasets for Misinformation Detection Task
+Existing misinformation detection benchmark datasets (e.g., [COVMIS](https://github.com/caryou/COVMIS) and [LIAR2](https://github.com/chengxuphd/liar2)) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. 
 
 ### Before re-categorization
 
