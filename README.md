@@ -3,8 +3,8 @@
 Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. Prior real-time misinformation detection tasks have been hindered by the dual problems of label redundancy and cold start. To this end, we propose a novel Cyclic Evidence-based Misinformation Detection (CEMD) framework, which incorporates two core mechanisms: (i) a Retrieval Augmented Generation (RAG) pipeline that accesses the latest external knowledge to augment insufficient prior knowledge, and (ii) a cyclic evidence-bootstrapping mechanism that mitigates label redundancy and cold start.
 
 ## Dataset
-[COVMIS](https://github.com/caryou/COVMIS): COVMIS was constructed to support the misinformation identification approach that mimics the act of fact checking by human for truth labelling. COVMIS is collected from November 2019 to March 2021, this dataset contains 14,384 claims (statements), 134,320 related articles, and many features associated with the claims such as claimants, news sources, dates, truth labels (true, partly true or false) and justifications for the truth labels.
 
+[COVMIS](https://github.com/caryou/COVMIS): COVMIS was constructed to support the misinformation identification approach that mimics the act of fact checking by human for truth labelling. COVMIS is collected from November 2019 to March 2021, this dataset contains 14,384 claims (statements), 134,320 related articles, and many features associated with the claims such as claimants, news sources, dates, truth labels (true, partly true or false) and justifications for the truth labels.
 
 [LIAR2](https://github.com/chengxuphd/liar2): The LIAR2 dataset is an upgrade of the LIAR dataset, which inherits the ideas of the LIAR dataset, refines the details and architecture, and expands the size of the dataset to make it more responsive to the needs of fake news detection tasks.
 
@@ -60,6 +60,7 @@ The composition of the dataset. T: *True*. PT: *Partly True*. F: *False*. MT: *M
 ## Evaluation of RAG
 
 ### Retrieval
+
 We use *t*-SNE and UMAP to reduce the dimensionality of the text embedding of the retrieved claims and their corresponding contexts for the clustering analysis.
 
 Embedding model: [mxbai-embed-large-v1](https://www.mixedbread.ai/docs/embeddings/mxbai-embed-large-v1)
@@ -68,18 +69,19 @@ Dimensionality reduction: 1024 to 2
 
 <br/>
 
-<img src="1. Evaluation of RAG/assets/umap.png" style="zoom: 55%;" />
+`<img src="1. Evaluation of RAG/assets/umap.png" style="zoom: 55%;" />`
 
 Visualizing claim-context relevance with UMAP.
 
-<br/><br/>
+`<br/><br/>`
 
-<img src="1. Evaluation of RAG/assets/t-sne.png" style="zoom: 59%;" />
+`<img src="1. Evaluation of RAG/assets/t-sne.png" style="zoom: 59%;" />`
 
 Visualizing claim-context relevance with *t*-SNE.
 
 ### Generation
-[Ragas](https://docs.ragas.io/en/stable/) is a library that provides tools to supercharge the evaluation of Large Language Model (LLM) applications. We evaluated the generative performance of the RAG pipeline using Ragas, selecting the top-performing LLM for subsequent classification experiments. 
+
+[Ragas](https://docs.ragas.io/en/stable/) is a library that provides tools to supercharge the evaluation of Large Language Model (LLM) applications. We evaluated the generative performance of the RAG pipeline using Ragas, selecting the top-performing LLM for subsequent classification experiments.
 
 `Faithfulness` metric measures the factual consistency of the generated answer against the given context. It is calculated from answer and retrieved context. The faithfulness score in our task is given by:
 
@@ -88,31 +90,32 @@ $$
 $$
 
 > **Example**
-> 
+>
 > Question: Please judge the correctness of the CLAIM "COVID-19 is an airborne disease" based on the available information.
-> 
+>
 > Contexts: Under experimental conditions, researchers found that the COVID-19 virus stayed viable in the air for three hours. The researchers estimate that in most real-world situations, the virus would remain suspended in the air for about 30 minutes, before settling onto surfaces. ... On 23 December, the World Health Organization (WHO) uttered the one word it had previously seemed incapable of applying to the virus SARS-CoV-2: ‘airborne’.
 >
 > Answer: COVID-19 can remain viable in the air for extended periods (up to six hours in experimental conditions and 30 minutes in real-world situations). Given the consistency and credibility of these sources, it is reasonable to conclude that the CLAIM "COVID-19 is an airborne disease" is TRUE.
 
 * **Step 1:** Break the generated answer into individual statements.
-  * Statements: 
+  * Statements:
     * Statement 1: COVID-19 can remain viable in the air for extended periods, up to six hours in experimental conditions and 30 minutes in real-world situations.
     * Statement 2: Given the consistency and credibility of these sources, it is reasonable to conclude that the CLAIM 'COVID-19 is an airborne disease' is TRUE.
 * **Step 2:** For each of the generated statements, verify if it can be inferred from the given context.
   - Statement 1: No
   - Statement 2: Yes
-* **Step 3:** Use the formula depicted above to calculate faithfulness: $\text{Faithfulness score} = \frac{1}{2} = 0.5$  
+* **Step 3:** Use the formula depicted above to calculate faithfulness: $\text{Faithfulness score} = \frac{1}{2} = 0.5$
 
-<br/><br/>
+`<br/><br/>`
 
 The assessment of `Answer Correctness` involves gauging the accuracy of the generated answer when compared to the ground truth.
 
-Answer correctness is computed as the sum of factual correctness and the semantic similarity between the given answer and the ground truth. 
+Answer correctness is computed as the sum of factual correctness and the semantic similarity between the given answer and the ground truth.
 
-Factual correctness quantifies the factual overlap between the generated answer and the ground truth answer. This is done using the concepts of: 
-- TP (True Positive): Facts or statements that are present in both the ground truth and the generated answer. 
-- FP (False Positive): Facts or statements that are present in the generated answer but not in the ground truth. 
+Factual correctness quantifies the factual overlap between the generated answer and the ground truth answer. This is done using the concepts of:
+
+- TP (True Positive): Facts or statements that are present in both the ground truth and the generated answer.
+- FP (False Positive): Facts or statements that are present in the generated answer but not in the ground truth.
 - FN (False Negative): Facts or statements that are present in the ground truth but not in the generated answer.
 
 Now, we can use the formula for the F1 score to quantify correctness based on the number of statements in each of these lists:
@@ -134,7 +137,7 @@ $$
 > Answer: Given the consistency and credibility of these sources, it is reasonable to conclude that the CLAIM "COVID-19 is an airborne disease" is TRUE.
 
 * **Step 1:** Calculate TP, FP and FN using the above rules.
-  * $\left| \text{TP} \right|$ = 1 
+  * $\left| \text{TP} \right|$ = 1
   * $\left| \text{FP} \right|$ = 0
   * $\left| \text{FN} \right|$ = 0
 * **Step 2:** Use the formula depicted above to calculate factual correctness: $\text{Factual correctness} = \frac{2 \cdot 1}{2 \cdot 1 + 0 + 0} = 1$
@@ -144,11 +147,12 @@ $$
 <br/>
 <img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 35%;" />
 
-Comparison of model performance in faithfulness and answer correctness metrics. 
+Comparison of model performance in faithfulness and answer correctness metrics.
 
 ## Evaluation of Classification
-We conduct multiple binary classification ex-periments using data labeled as True and False from COVMIS2, combining various LLMs and fine-tuning strategies. Through extensive experimentation, we identified the optimal configuration for our CEMD framework. The most effective combination, named as `CEMDo`, includes the Llama-3-70B-Instruct LLM in the RAG pipeline, the Llama-3-8B-Instruct LLM for classification, and the DoRA fine-tuning strategy.
-<br/>
+
+We conduct multiple binary classification experiments using data labeled as True and False from COVMIS2, combining various LLMs and fine-tuning strategies. Through extensive experimentation, we identified the optimal configuration for our CEMD framework. The most effective combination, named as `CEMDo`, includes the Llama-3-70B-Instruct LLM in the RAG pipeline, the Llama-3-8B-Instruct LLM for classification, and the DoRA fine-tuning strategy.
+`<br/>`
 
 <table>
     <tr>
@@ -167,7 +171,7 @@ We conduct multiple binary classification ex-periments using data labeled as Tru
         <td>0.9857</td>
         <td>0.9700</td>
     </tr>
-    <tr>	
+    <tr>
         <td>LoRA+</td>
         <td>0.9869</td>
         <td>0.9821</td>
@@ -203,7 +207,7 @@ We conduct multiple binary classification ex-periments using data labeled as Tru
         <td>0.9890</td>
         <td>0.9756</td>
     </tr>
-    <tr>	
+    <tr>
         <td>LoRA+</td>
         <td>0.9877</td>
         <td>0.9833</td>
@@ -239,7 +243,7 @@ We conduct multiple binary classification ex-periments using data labeled as Tru
         <td>0.9878</td>
         <td>0.9767</td>
     </tr>
-    <tr>	
+    <tr>
         <td>LoRA+</td>
         <td>0.9877</td>
         <td>0.9832</td>
@@ -270,13 +274,14 @@ We conduct multiple binary classification ex-periments using data labeled as Tru
 </table>
 Classification results of different LLMs and fine-tuning strategies.
 
-<br/><br/>
+`<br/><br/>`
 
-<img src="2. Evaluation of Classification/assets/human_baseline.svg" style="zoom: 75%;" />
+`<img src="2. Evaluation of Classification/assets/human_baseline.svg" style="zoom: 75%;" />`
 
 Comparative analysis of LLM combinations and fine-tuning strategies with human baseline (the center).
 
 ## Performance
+
 We also conduct experiments using the LIAR2 dataset and compare the performance of [FDHN](https://github.com/chengxuphd/FDHN) with that of CEMDo. It is evident that CEMDo outperforms FDHN on both COVMIS2 and LIAR2.
 
 <table>
@@ -322,6 +327,7 @@ We also conduct experiments using the LIAR2 dataset and compare the performance 
 Performance of FDHN and CEMDo on two different datasets.
 
 ## Data Recategorization
+
 We recategorize data with redundant labels using CEMDo fine-tuned with data labeled as *TRUE* or *FALSE*. Subsequently, we conduct binary classification experiments with all data from each dataset using CEMDo.
 
 <table>
@@ -424,9 +430,10 @@ The composition of the dataset after recategorization. T: *True*. PT: *Partly Tr
   </tr>
 </table>
 
-Binary classification experiments using all the data from the dataset. X<sub>Y</sub> denotes the portion of the data initially labeled as *X* that is recategorized as *Y*. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
+Binary classification experiments using all the data from the dataset. X`<sub>`Y`</sub>` denotes the portion of the data initially labeled as *X* that is recategorized as *Y*. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
 ## Ablation Study
+
 Explore the differences between 6 strategies: the RAG pipeline combined with online search, the RAG pipeline using a local knowledge base, the strategy without using a RAG pipeline and each of these strategies combined with the SFT. We use COVMIS2 as the dataset for the comparative experiments, with related articles serving as the local knowledge base.
 
 The results show that using RAG and SFT can improve the misinformation detection.
@@ -438,13 +445,14 @@ The results show that using RAG and SFT can improve the misinformation detection
 | RAG (OS) + No SFT | 0.9107           | 0.8830           | 0.8731           | 0.8947           |
 | No RAG + SFT      | 0.9770           | 0.9686           | 0.9754           | 0.9623           |
 | RAG (RA) + SFT    | 0.9852           | 0.9797           | 0.9892           | 0.9711           |
-| RAG (OS) + SFT    | **0.9885**       | **0.9844**       | **0.9901**       | **0.9789**       |
+| RAG (OS) + SFT    | **0.9885** | **0.9844** | **0.9901** | **0.9789** |
 
 Ablation Study. The dataset used is COVMIS2, where RA stands for related articles, and OS represents online search. The model in the RAG pipeline is Llama-3-70B-Instruct. For the SFT, we employ Llama-3-8B-Instruct, fine-tuned with DoRA.
 
 ## Real-time Detection
+
 The CEMD framework harnesses external knowledge to augment the initial prior knowledge with regular 24-hour updates, thereby mitigating label redundancy and addressing the cold start problem.
 
-<img src="6. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />
+`<img src="6. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />`
 
 Misinformation detection with regular 24-hour updates
