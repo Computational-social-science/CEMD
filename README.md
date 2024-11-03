@@ -30,7 +30,7 @@ For the clustering analysis on COVMIS2 using t-SNE projections, the features of 
 
 <img src="1. Evaluation of RAG/assets/t-sne.svg" style="zoom: 30%;" />
 
-**Visualizing claim-context relevance with *t*-SNE.** The *t*-SNE visualization of the COVMIS2 dataset with 73,150 features in 12,192 clusters based on the same parameters (n_neighbors=10, min_dist=0.001).
+**Visualizing claim-context relevance with *t*-SNE.** The *t*-SNE visualization of the COVMIS2 dataset with 73,150 features in 12,192 clusters based on the same parameters (n_neighbors=20, min_dist=0.35).
 
 #### UMAP projections
 For the clustering analysis on COVMIS2 using UMAP projections, the features of retrieved contexts (red) tend to group together in neighborhoods of each claim (blue). We find that the average distance for the top 95% ranges from 0 to 0.2294 (data is normalized).
@@ -312,7 +312,7 @@ The cyclic nature of our CEMD framework is leveraged through a cyclic bootstrapp
 
 <img src="5. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />
 
-**Misinformation detection on COVMIS2 with regular 24-hour updates (27 September, 2024 - 2 November, 2024)(Acc<sub>max</sub> = 0.9885, Acc<submin</sub> = 0.9861).**
+**Misinformation detection on COVMIS2 with regular 24-hour updates (27 September, 2024 - 2 November, 2024)(Acc<sub>max</sub> = 0.9885, Acc<sub>min</sub> = 0.9861).**
 
 ## Curating Benchmark Datasets for Misinformation Detection Task
 Existing misinformation detection benchmark datasets (e.g., [COVMIS](https://github.com/caryou/COVMIS) and [LIAR2](https://github.com/chengxuphd/liar2)) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. 
