@@ -69,9 +69,9 @@ We introduce a novel benchmark dataset, COVMIS2, built upon COVMIS, and conduct 
 
 We use *t*-SNE and UMAP to reduce the dimensionality of the text embedding of each claim and the corresponding retrieved contexts for the clustering analysis.
 
-Embedding model: [mxbai-embed-large-v1](https://www.mixedbread.ai/docs/embeddings/mxbai-embed-large-v1)
+**Embedding model**: [mxbai-embed-large-v1](https://www.mixedbread.ai/docs/embeddings/mxbai-embed-large-v1)
 
-Dimensionality reduction: 1024 to 2
+**Dimensionality reduction**: 1024 to 2
 
 #### t-SNE projections
 For the clustering analysis on COVMIS2 using t-SNE projections, the features of retrieved contexts (red) tend to group together in neighborhoods of each claim (blue). We find that the average distance for the top 95% ranges from 0 to 0.2601 (data is normalized).
