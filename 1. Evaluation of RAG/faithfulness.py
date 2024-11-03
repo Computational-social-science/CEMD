@@ -30,7 +30,7 @@ warnings.filterwarnings("ignore")
 search_engine = "brave"
 
 data_train = covmis.load_data('entire')
-data_search_llm = covmis.load_data_llm('entire')
+data_search_llm = covmis.load_data_llm('entire', None)
 data_search = covmis.load_data_search('entire', None)
 
 chat_model = ChatOpenAI(
