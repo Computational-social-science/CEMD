@@ -375,7 +375,7 @@ To facilitate the development of effective misinformation detection models, we c
         <th>Number</th>
     </tr>
     <tr>
-        <td rowspan="4">COVMIS2</td>
+        <td rowspan="4">COVMIS2024</td>
         <td>T</td>
         <td>2989</td>
     </tr>
@@ -392,7 +392,7 @@ To facilitate the development of effective misinformation detection models, we c
         <td>1766</td>
     </tr>
     <tr>
-        <td rowspan="9">LIAR2</td>
+        <td rowspan="9">LIAR2024</td>
         <td>T</td>
         <td>2585</td>
     </tr>
@@ -446,7 +446,7 @@ Using the curated datasets, we conducted binary classification experiments to es
     <th>R</th>
   </tr>
   <tr>
-    <td>COVMIS2</td>
+    <td>COVMIS2024</td>
     <td>TRUE: T, PT<sub>TRUE</sub>; <br> FALSE: F, PT<sub>FALSE</sub>;</td>
     <td>0.9882</td>
     <td>0.9828</td>
@@ -454,7 +454,7 @@ Using the curated datasets, we conducted binary classification experiments to es
     <td>0.9801</td>
   </tr>
   <tr>
-    <td rowspan="2">LIAR2</td>
+    <td rowspan="2">LIAR2024</td>
     <td>TRUE: T, MT, HT; <br> FALSE: BT, F, PF;</td>
     <td>0.8641</td>
     <td>0.8621</td>
