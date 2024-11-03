@@ -15,6 +15,8 @@ Existing misinformation detection benchmark datasets (e.g., [COVMIS](https://git
 ### COVMIS2: A Novel Benchmark dataset
 We introduce a novel benchmark dataset, COVMIS2, built upon [COVMIS](https://github.com/caryou/COVMIS), and conduct comprehensive experiments to evaluate the efficacy of our framework. 
 
+We verify the COVMIS dataset through manual verification, ensuring the accuracy of labels and resolving ambiguous claims by consulting related articles provided by the authors and fact-checking results from corresponding fact-checking websites. A team of three annotators independently label the claims, and the final labels are determined using a majority voting strategy. 
+
 ## Evaluation of RAG
 
 ### Clustering Analysis
