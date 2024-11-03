@@ -6,7 +6,7 @@ We introduce a novel benchmark dataset, COVMIS2, built upon COVMIS, and conduct 
 
 ## Datasets
 Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. 
-
+### Common Benchmark datasets
 [COVMIS](https://github.com/caryou/COVMIS): COVMIS was constructed to support the misinformation identification approach that mimics the act of fact checking by human for truth labelling. COVMIS is collected from November 2019 to March 2021, this dataset contains 14,384 claims (statements), 134,320 related articles, and many features associated with the claims such as claimants, news sources, dates, truth labels (true, partly true or false) and justifications for the truth labels.
 
 [LIAR2](https://github.com/chengxuphd/liar2): The LIAR2 dataset is an upgrade of the LIAR dataset, which inherits the ideas of the LIAR dataset, refines the details and architecture, and expands the size of the dataset to make it more responsive to the needs of fake news detection tasks.
@@ -18,7 +18,7 @@ Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) ar
         <th>Number</th>
     </tr>
     <tr>
-        <td rowspan="3">COVMIS2</td>
+        <td rowspan="3">COVMIS</td>
         <td>T</td>
         <td>1998</td>
     </tr>
@@ -60,31 +60,34 @@ Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) ar
 
 The composition of the dataset. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
+### COVMIS2: A Novel Benchmark dataset
+We introduce a novel benchmark dataset, COVMIS2, built upon COVMIS, and conduct comprehensive experiments to evaluate the efficacy of our framework. 
+
 ## Evaluation of RAG
 
-### Retrieval
+### Clustering Analysis
 
 We use *t*-SNE and UMAP to reduce the dimensionality of the text embedding of each claim and the corresponding retrieved contexts for the clustering analysis.
 
 Embedding model: [mxbai-embed-large-v1](https://www.mixedbread.ai/docs/embeddings/mxbai-embed-large-v1)
 
 Dimensionality reduction: 1024 to 2
-<br/>
 
-For the clustering analysis use t-SNE projections, the features of retrieved contexts (red) tend to group together in neighborhoods of each claim (blue). We find that the average distance for the top 95% ranges from 0 to 0.2601 (data is normalized).
+#### t-SNE projections
+For the clustering analysis on COVMIS2 using t-SNE projections, the features of retrieved contexts (red) tend to group together in neighborhoods of each claim (blue). We find that the average distance for the top 95% ranges from 0 to 0.2601 (data is normalized).
 
 <img src="1. Evaluation of RAG/assets/t-sne.svg" style="zoom: 30%;" />
 
-Visualizing claim-context relevance with *t*-SNE.
+**Visualizing claim-context relevance with *t*-SNE.** The *t*-SNE visualization of the COVMIS2 dataset with 73,150 features in 12,192 clusters based on the same parameters (n_neighbors=10, min_dist=0.001).
 
-<br/>
-For the clustering analysis using UMAP projections, the features of retrieved contexts (orange) tend to group together in neighborhoods of each claim (blue). We find that the average distance for the top 95% ranges from 0 to 0.2294 (data is normalized).
+#### UMAP projections
+For the clustering analysis on COVMIS2 using UMAP projections, the features of retrieved contexts (red) tend to group together in neighborhoods of each claim (blue). We find that the average distance for the top 95% ranges from 0 to 0.2294 (data is normalized).
 
 <img src="1. Evaluation of RAG/assets/umap.svg" style="zoom: 30%;" />
 
-Visualizing claim-context relevance with UMAP.
+**Visualizing claim-context relevance with UMAP.** The UMAP visualization of the COVMIS2 dataset with 73,150 features in 12,192 clusters based on the same parameters (n_neighbors=10, min_dist=0.001).
 
-### Generation
+### Metrics of RAGAs
 
 [Ragas](https://docs.ragas.io/en/stable/) is a library that provides tools to supercharge the evaluation of Large Language Model (LLM) applications. We evaluated the generative performance of the RAG pipeline using Ragas, selecting the top-performing LLM for subsequent classification experiments.
 
@@ -149,9 +152,12 @@ $$
 * **Step 4:** Use the formula depicted above to calculate answer correctness score: $\text{Answer correctness score} = 0.75 + 0.25\theta$
 
 <br/>
+For generation, we conducted experiments with SOLAR-10.7B-Instruct, Mixtral-8x7B-Instruct, and Llama-3-70B-Instruct. We can derive a comparison of the RAG generation performance of the three LLMs. 
 <img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 35%;" />
 
-Comparison of model performance in faithfulness and answer correctness metrics.
+**Comparison of model performance in faithfulness and answer correctness metrics.** The horizontal axis represents the interval of a certain metric, while the vertical axis indicates the number of samples falling into that inter-val. 
+
+The experimental results demonstrate that the three LLMs exhibit varying degrees of differences in scores for faithfulness and answer correctness in the RAG generation task. The overall ranking for generation perfor-mance goes to: Llama-3-70B-Instruct > Mix-tral-8x7B-Instruct > SOLAR-10.7B-Instruct. Finally, we select Llama-3-70B-Instruct as the LLM for augmenting prior knowledge in sub-sequent experiments.
 
 ## Evaluation of Binary Classification
 
@@ -279,6 +285,7 @@ We conduct multiple binary classification experiments using data labeled as True
 Classification results of different LLMs and fine-tuning strategies.
 
 <br/><br/>
+While results may vary across different combinations, all configurations surpassed the previously established human baseline of 92.5%, demonstrating the effectiveness of our proposed approach.
 
 <img src="2. Evaluation of Classification and Performance/assets/human_baseline.svg" style="zoom: 75%;" />
 
