@@ -1,8 +1,9 @@
 # CEMD
 
-Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. Prior real-time misinformation detection tasks have been hindered by the dual problems of label redundancy and cold start. To this end, we propose a novel Cyclic Evidence-based Misinformation Detection (CEMD) framework, which incorporates two core mechanisms: (i) a Retrieval Augmented Generation (RAG) pipeline that accesses the latest external knowledge to augment insufficient prior knowledge, and (ii) a cyclic evidence-bootstrapping mechanism that mitigates label redundancy and cold start.
+Prior real-time misinformation detection tasks have been hindered by the dual problems of label redundancy and cold start. To this end, we propose a novel Cyclic Evidence-based Misinformation Detection (CEMD) framework, which incorporates two core mechanisms: (i) a Retrieval Augmented Generation (RAG) pipeline that accesses the latest external knowledge to augment insufficient prior knowledge, and (ii) a cyclic evidence-bootstrapping mechanism that mitigates label redundancy and cold start.
 
 ## Dataset
+Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. 
 
 [COVMIS](https://github.com/caryou/COVMIS): COVMIS was constructed to support the misinformation identification approach that mimics the act of fact checking by human for truth labelling. COVMIS is collected from November 2019 to March 2021, this dataset contains 14,384 claims (statements), 134,320 related articles, and many features associated with the claims such as claimants, news sources, dates, truth labels (true, partly true or false) and justifications for the truth labels.
 
@@ -61,7 +62,7 @@ The composition of the dataset. T: *True*. PT: *Partly True*. F: *False*. MT: *M
 
 ### Retrieval
 
-We use *t*-SNE and UMAP to reduce the dimensionality of the text embedding of the retrieved claims and their corresponding contexts for the clustering analysis.
+We use *t*-SNE and UMAP to reduce the dimensionality of the text embedding of each claim and the corresponding retrieved contexts for the clustering analysis.
 
 Embedding model: [mxbai-embed-large-v1](https://www.mixedbread.ai/docs/embeddings/mxbai-embed-large-v1)
 
@@ -108,7 +109,6 @@ $$
 * **Step 3:** Use the formula depicted above to calculate faithfulness: $\text{Faithfulness score} = \frac{1}{2} = 0.5$
 
 <br/><br/>
-
 The assessment of `Answer Correctness` involves gauging the accuracy of the generated answer when compared to the ground truth.
 
 Answer correctness is computed as the sum of factual correctness and the semantic similarity between the given answer and the ground truth.
@@ -150,7 +150,7 @@ $$
 
 Comparison of model performance in faithfulness and answer correctness metrics.
 
-## Evaluation of Classification
+## Evaluation of Binary Classification
 
 We conduct multiple binary classification experiments using data labeled as True and False from COVMIS2, combining various LLMs and fine-tuning strategies. Through extensive experimentation, we identified the optimal configuration for our CEMD framework. The most effective combination, named as `CEMDo`, includes the Llama-3-70B-Instruct LLM in the RAG pipeline, the Llama-3-8B-Instruct LLM for classification, and the DoRA fine-tuning strategy.
 <br/>
@@ -456,4 +456,7 @@ The CEMD framework harnesses external knowledge to augment the initial prior kno
 
 <img src="5. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />
 
-Misinformation detection with regular 24-hour updates
+Misinformation detection with regular 24-hour updates.
+
+## Citing this work
+The relevant paper is currently under review, during which time this repository is private. Once it goes public, a bibtex reference will be provided here.
