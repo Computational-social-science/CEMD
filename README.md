@@ -2,7 +2,9 @@
 
 Prior real-time misinformation detection tasks have been hindered by the dual problems of label redundancy and cold start. To this end, we propose a novel Cyclic Evidence-based Misinformation Detection (CEMD) framework, which incorporates two core mechanisms: (i) a Retrieval Augmented Generation (RAG) pipeline that accesses the latest external knowledge to augment insufficient prior knowledge, and (ii) a cyclic evidence-bootstrapping mechanism that mitigates label redundancy and cold start.
 
-## Dataset
+We introduce a novel benchmark dataset, COVMIS2, built upon COVMIS, and conduct comprehensive experiments to evaluate the efficacy of our framework. Our results demonstrate that CEMD outperforms the prior state-of-the-art (SOTA) baseline on LIAR2 by 11.95% and surpasses the human baseline on COVMIS2 by 6.31%, leveraging the Llama-3-70B-Instruct model to augment prior knowledge and the DoRA fine-tuned Llama-3-8B-Instruct model for binary classification.
+
+## Datasets
 Existing misinformation detection benchmark datasets (e.g., COVMIS and LIAR2) are limited by their reliance on fact-checking labels that are prone to factual inaccuracies due to cognitive constraints of fact-checkers and outdated labels. 
 
 [COVMIS](https://github.com/caryou/COVMIS): COVMIS was constructed to support the misinformation identification approach that mimics the act of fact checking by human for truth labelling. COVMIS is collected from November 2019 to March 2021, this dataset contains 14,384 claims (statements), 134,320 related articles, and many features associated with the claims such as claimants, news sources, dates, truth labels (true, partly true or false) and justifications for the truth labels.
