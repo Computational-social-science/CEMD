@@ -153,6 +153,7 @@ $$
 
 <br/>
 For COVMIS2, we conducted experiments with SOLAR-10.7B-Instruct, Mixtral-8x7B-Instruct, and Llama-3-70B-Instruct. We can derive a comparison of the RAG generation performance of the three LLMs. 
+
 <img src="1. Evaluation of RAG/assets/ragas.svg" style="zoom: 35%;" />
 
 **Comparison of model performance in faithfulness and answer correctness metrics.** The horizontal axis represents the interval of a certain metric, while the vertical axis indicates the number of samples falling into that interval. 
@@ -359,7 +360,7 @@ The cyclic nature of our CEMD framework is leveraged through a cyclic bootstrapp
 
 <img src="5. Real-time Detection/assets/timeline2.svg" style="zoom: 75%;" />
 
-**Misinformation detection on COVMIS2 with regular 24-hour updates (27 September, 2024 - 2 November, 2024)($Acc_{max}$ = 0.9885, $Acc_{min}$ = 0.9861).**
+**Misinformation detection on COVMIS2 with regular 24-hour updates (27 September, 2024 - 2 November, 2024)(Acc<sub>max</sub> = 0.9885, Acc<submin</sub> = 0.9861).**
 
 ## Curating Benchmark Datasets for Misinformation Detection Task
 
@@ -432,7 +433,7 @@ To facilitate the development of effective misinformation detection models, we c
 The composition of the dataset after recategorization. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
 ### Establishing Baselines for COVMIS2024 and LIAR2024
-Using the curated datasets, we conducted binary classification experiments to establish baselines for COVMIS2024 and LIAR2024.  
+Using the curated datasets, we conducted binary classification experiments to establish baselines for COVMIS2024 and LIAR2024.
 <br/>
 
 <table>
@@ -475,3 +476,4 @@ Our results provide the latest benchmarks for misinformation detection tasks, of
 
 ## Citing this work
 The relevant paper is currently under review, during which time this repository is private. Once it goes public, a bibtex reference will be provided here.
+
