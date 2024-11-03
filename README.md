@@ -71,13 +71,14 @@ Dimensionality reduction: 1024 to 2
 
 For the clustering analysis using UMAP projections, the features of retrieved contexts tend to group together in neighborhoods of each claim. We find that the average distance for the top 95% ranges from 0 to 0.2294 (data is normalized).
 
-<img src="1. Evaluation of RAG/assets/umap.png" style="zoom: 55%;" />
+<img src="1. Evaluation of RAG/assets/umap.svg" style="zoom: 45%;" />
 
 Visualizing claim-context relevance with UMAP.
 
 <br/>
+For the clustering analysis use t-SNE projections, the features of retrieved contexts tend to group together in neighborhoods of each claim. We find that the average distance for the top 95% ranges from 0 to 0.2601 (data is normalized).
 
-<img src="1. Evaluation of RAG/assets/t-sne.png" style="zoom: 59%;" />
+<img src="1. Evaluation of RAG/assets/t-sne.svg" style="zoom: 45%;" />
 
 Visualizing claim-context relevance with *t*-SNE.
 
