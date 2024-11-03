@@ -70,6 +70,7 @@ Embedding model: [mxbai-embed-large-v1](https://www.mixedbread.ai/docs/embedding
 
 Dimensionality reduction: 1024 to 2
 <br/>
+
 For the clustering analysis use t-SNE projections, the features of retrieved contexts (red) tend to group together in neighborhoods of each claim (blue). We find that the average distance for the top 95% ranges from 0 to 0.2601 (data is normalized).
 
 <img src="1. Evaluation of RAG/assets/t-sne.svg" style="zoom: 30%;" />
