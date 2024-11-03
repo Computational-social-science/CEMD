@@ -277,6 +277,8 @@ Classification results of different LLMs and fine-tuning strategies.
 Comparative analysis of LLM combinations and fine-tuning strategies with human baseline (the center).
 
 ## Performance
+We also conduct experiments using the LIAR2 dataset and compare the performance of [FDHN](https://github.com/chengxuphd/FDHN) with that of CEMDo. It is evident that CEMDo outperforms FDHN on both COVMIS2 and LIAR2.
+
 <table>
   <tr>
     <th>Dataset</th>
@@ -425,6 +427,9 @@ The composition of the dataset after recategorization. T: *True*. PT: *Partly Tr
 Binary classification experiments using all the data from the dataset. X<sub>Y</sub> denotes the portion of the data initially labeled as *X* that is recategorized as *Y*. T: *True*. PT: *Partly True*. F: *False*. MT: *Mostly True*. HT: *Half True*. BT: *Barely True*. PF: *Pants on Fire*.
 
 ## Ablation Study
+Explore the differences between 6 strategies: the RAG pipeline combined with online search, the RAG pipeline using a local knowledge base, the strategy without using a RAG pipeline and each of these strategies combined with the SFT. We use COVMIS2 as the dataset for the comparative experiments, with related articles serving as the local knowledge base.
+
+From the results, we can see that using RAG and SFT can improve the misinformation detection.
 
 | Method            | Acc              | F1               | P                | R                |
 | :---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
