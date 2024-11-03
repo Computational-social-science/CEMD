@@ -13,7 +13,7 @@ Existing misinformation detection benchmark datasets (e.g., [COVMIS](https://git
 
 
 ### COVMIS2: A Novel Benchmark dataset
-We introduce a novel benchmark dataset, COVMIS2, built upon [LIAR2](https://github.com/chengxuphd/liar2), and conduct comprehensive experiments to evaluate the efficacy of our framework. 
+We introduce a novel benchmark dataset, COVMIS2, built upon [COVMIS](https://github.com/caryou/COVMIS), and conduct comprehensive experiments to evaluate the efficacy of our framework. 
 
 ## Evaluation of RAG
 
