@@ -309,76 +309,62 @@ Explore the differences between 6 strategies: the RAG pipeline combined with onl
 </thead>
 <tbody>
 <tr>
-<td rowspan="6">COVMIS2</td>
-<td>No RAG + No fine-tuning</td>
-<td>0.7902</td>
-<td>0.7632</td>
-<td>0.7548</td>
-<td>0.8339</td>
-</tr>
-<tr>
-<td>RAG (RA) + No fine-tuning</td>
-<td>0.8828</td>
-<td>0.8465</td>
-<td>0.8376</td>
-<td>0.8571</td>
-</tr>
-<tr>
-<td>RAG (OS) + No fine-tuning</td>
-<td>0.9107</td>
-<td>0.8830</td>
-<td>0.8731</td>
-<td>0.8947</td>
-</tr>
-<tr>
-<td>No RAG + fine-tuning</td>
-<td>0.9770</td>
-<td>0.9686</td>
-<td>0.9754</td>
-<td>0.9623</td>
-</tr>
-<tr>
-<td>RAG (RA) + fine-tuning</td>
-<td>0.9852</td>
-<td>0.9797</td>
-<td>0.9892</td>
-<td>0.9711</td>
-</tr>
-<tr>
-<td>RAG (OS) + fine-tuning</td>
+<td rowspan="4">COVMIS2</td>
+<td>CEMDo</td>
 <td><strong>0.9885</strong></td>
 <td><strong>0.9844</strong></td>
 <td><strong>0.9901</strong></td>
 <td><strong>0.9789</strong></td>
 </tr>
 <tr>
+<td>w/o RAG</td>
+<td>0.9770</td>
+<td>0.9686</td>
+<td>0.9754</td>
+<td>0.9623</td>
+</tr>
+<tr>
+<td>w/o fine-tuning</td>
+<td>0.9107</td>
+<td>0.8830</td>
+<td>0.8731</td>
+<td>0.8947</td>
+</tr>
+<tr>
+<td>w/o {RAG + fine-tuning}</td>
+<td>0.7902</td>
+<td>0.7632</td>
+<td>0.7548</td>
+<td>0.8339</td>
+</tr>
+<tr>
 <td rowspan="4">LIAR2</td>
-<td>No RAG + No fine-tuning</td>
-<td>0.7741</td>
-<td>0.7178</td>
-<td>0.7032</td>
-<td>0.7734</td>
+<td>CEMDo</td>
+<td><strong>0.9378</strong></td>
+<td><strong>0.9074</strong></td>
+<td><strong>0.9052</strong></td>
+<td><strong>0.9097</strong></td>
 </tr>
 <tr>
-<td>RAG (OS) + No fine-tuning</td>
-<td>0.8936</td>
-<td>0.8325</td>
-<td>0.8522</td>
-<td>0.8168</td>
-</tr>
-<tr>
-<td>No RAG + fine-tuning</td>
+<td>w/o RAG</td>
 <td>0.8609</td>
 <td>0.7869</td>
 <td>0.7941</td>
 <td>0.7805</td>
 </tr>
 <tr>
-<td>RAG (OS) + fine-tuning</td>
-<td><strong>0.9378</strong></td>
-<td><strong>0.9074</strong></td>
-<td><strong>0.9052</strong></td>
-<td><strong>0.9097</strong></td>
+<td>w/o fine-tuning</td>
+<td>0.8936</td>
+<td>0.8325</td>
+<td>0.8522</td>
+<td>0.8168</td>
+</tr>
+<tr>
+<td>w/o {RAG + fine-tuning}</td>
+<td>0.7741</td>
+<td>0.7178</td>
+<td>0.7032</td>
+<td>0.7734</td>
 </tr>
 </tbody>
 </table>
